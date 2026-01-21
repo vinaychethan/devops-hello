@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: devops-hello-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: devops-hello
+  template:
+    metadata:
+      labels:
+        app: devops-hello
+    spec:
+      containers:
+      - name: devops-hello
+        image: devops-hello:1.0
+        ports:
+        - containerPort: 3000
