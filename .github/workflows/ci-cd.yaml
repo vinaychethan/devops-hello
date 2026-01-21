@@ -2,9 +2,8 @@ name: CI Pipeline
 
 on:
   push:
-   
-  pull_request:
-    branches: [ "master" ]
+    branches:
+      - main
 
 jobs:
   build-test-docker:
