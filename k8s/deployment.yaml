@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: devops-hello-deployment
+  name: devops-hello
 spec:
   replicas: 1
   selector:
@@ -13,7 +13,8 @@ spec:
         app: devops-hello
     spec:
       containers:
-      - name: devops-hello
-        image: devops-hello:1.0
-        ports:
-        - containerPort: 3000
+        - name: devops-hello
+          image: devops-hello:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000

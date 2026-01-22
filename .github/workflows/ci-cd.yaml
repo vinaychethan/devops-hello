@@ -1,4 +1,4 @@
-name: CI Pipeline
+name: CI-CD with Kubernetes Deployment
 
 on:
   push:
@@ -6,8 +6,8 @@ on:
       - main
 
 jobs:
-  build-test-docker:
-    runs-on: ubuntu-latest
+  build-test-deploy:
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
@@ -21,8 +21,13 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run unit tests
+      - name: Run tests
         run: npm test
 
       - name: Build Docker image
-        run: docker build -t devops-hello:${{ github.sha }} .
+        run: docker build -t devops-hello:latest .
+
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f k8s/deployment.yaml
+          kubectl apply -f k8s/service.yaml
